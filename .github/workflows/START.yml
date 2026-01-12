@@ -1,7 +1,4 @@
-name: 上班
-
-permissions:
-  contents: read
+name: "上班"
 
 on:
   workflow_dispatch:
@@ -10,27 +7,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.1"
-          tools: composer:v2
+      - uses: actions/checkout@v2
 
       - name: Install dependencies
-        env:
-          COMPOSER_AUTH: |
-            {
-              "github-oauth": {
-                "github.com": "${{ secrets.GITHUB_TOKEN }}"
-              }
-            }
-        run: composer install --no-dev --optimize-autoloader
+        run: composer install --optimize-autoloader --no-dev
 
       - name: Run sign
         env:

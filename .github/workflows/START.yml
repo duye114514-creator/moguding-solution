@@ -1,5 +1,8 @@
 name: 上班
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   schedule:
